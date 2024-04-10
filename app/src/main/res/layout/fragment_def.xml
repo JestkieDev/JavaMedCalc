@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/deffrag"
     android:background="@color/white">
 
     <Button
@@ -11,6 +12,7 @@
         android:layout_width="160dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:textSize="15sp"
         android:gravity="center"
         android:text="Назад"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +26,7 @@
         android:layout_height="62dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:textSize="18sp"
         android:gravity="center"
         android:hint="Калий сывортки(ммоль/л)"
         android:inputType="numberDecimal"
@@ -36,6 +39,7 @@
         android:layout_width="259dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
+        android:textSize="18sp"
         android:ems="10"
         android:gravity="center"
         android:hint="Вес в кг"
@@ -49,6 +53,7 @@
         android:id="@+id/okdefBTN"
         android:layout_width="231dp"
         android:layout_height="58dp"
+        android:textSize="18sp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Рассчитать!"
@@ -59,6 +64,7 @@
     <Spinner
         android:id="@+id/defSPN"
         android:layout_width="258dp"
+        android:textSize="18sp"
         android:layout_height="53dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,8 +86,9 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="350dp"
-        android:layout_height="88dp"
+        android:layout_height="wrap_content"
         android:text="Калькулятор для расчета дефицита калия в плазме крови и объема растворов различной концентрации для его возмещения. Расчет проводится по универсальной формуле, в качестве нормы взята концентрация калия в плазме - 5 ммоль/л."
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"

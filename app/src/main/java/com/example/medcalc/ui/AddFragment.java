@@ -10,6 +10,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.medcalc.R;
 import com.example.medcalc.db.MainDb;
@@ -50,10 +52,8 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 DashboardFragment dashboardFragment = new DashboardFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,dashboardFragment)
-                        .addToBackStack(null)
-                        .commit();
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.navigation_dashboard);
             }
         });
         return view;

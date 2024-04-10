@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.medcalc.R;
 import com.example.medcalc.db.MainDb;
@@ -34,6 +37,8 @@ public class PacientFragment extends Fragment {
         TextView pinfTv = view.findViewById(R.id.pinfTV);
         TextView pcapTv = view.findViewById(R.id.pcapTV);
         TextView pdefTv = view.findViewById(R.id.pdefTV);
+        Button backaddBTN = view.findViewById(R.id.backpacBTN);
+
         DecimalFormat df = new DecimalFormat("###.##");
         String nme;
         mainDb = MainDb.getINSTANCE(getContext());
@@ -44,8 +49,36 @@ public class PacientFragment extends Fragment {
             nme = bundle.getString("nme", "egor");
             pacients = pacientDao.getWithName(nme);
         }
-        pnameTv.setText(pacients.get(0).name.toString());
-        pageTv.setText(String.valueOf(pacients.get(0).age));
+        pnameTv.setText("ФИО: " + pacients.get(0).name.toString());
+        pageTv.setText("Возраст: " + String.valueOf(pacients.get(0).age) + " лет");
+        int n = String.valueOf(pacients.get(0).age).length();
+        if (n == 1) {
+            switch (String.valueOf(pacients.get(0).age).charAt(n-1)) {
+                case '1':
+                    pageTv.setText(String.valueOf(pacients.get(0).age) + " год");
+                    break;
+                case '2': case '3': case '4':
+                    pageTv.setText(String.valueOf(pacients.get(0).age) + " года");
+                    break;
+                case '5': case '6': case '7': case '8': case '9':
+                    pageTv.setText(String.valueOf(pacients.get(0).age) + " лет");
+                    break;
+            }
+        } else if (pacients.get(0).age < 21) {
+            pageTv.setText(String.valueOf(pacients.get(0).age) + " лет");
+        } else  {
+            switch (String.valueOf(pacients.get(0).age).charAt(n-1)) {
+                case '1':
+                    pageTv.setText(String.valueOf(pacients.get(0).age) + " год");
+                    break;
+                case '2': case '3': case '4':
+                    pageTv.setText(String.valueOf(pacients.get(0).age) + " года");
+                    break;
+                case '5': case '6': case '7': case '8': case '9': case '0':
+                    pageTv.setText(String.valueOf(pacients.get(0).age) + " лет");
+                    break;
+            }
+        }
         pimtTv.setText("ИМТ: " + df.format(pacients.get(0).imt));
         pinfTv.setText("Скорость инфузии препарата: " + df.format(pacients.get(0).nf) + " мл/ч");
         pcapTv.setText("Скорость внутривенного капельного введения препарата: " + df.format(pacients.get(0).cap) + " капель в мин");
@@ -57,6 +90,14 @@ public class PacientFragment extends Fragment {
         } else if (pacients.get(0).def < 0) {
             pdefTv.setText("Дефицит: " + "Гиперкалиемия");
         }
+
+        backaddBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.navigation_dashboard);
+            }
+        });
 
 
 

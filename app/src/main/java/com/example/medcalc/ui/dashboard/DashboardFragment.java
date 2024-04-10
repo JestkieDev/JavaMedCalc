@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,7 +45,7 @@ public class DashboardFragment extends Fragment {
             pacients.addAll(pacientDao.getAll());
 
         }
-        pacientsAdapter = new PacientsAdapter(getContext(),pacients);
+        pacientsAdapter = new PacientsAdapter(getActivity(),pacients);
         pacientsAdapter.notifyDataSetChanged();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -55,11 +57,8 @@ public class DashboardFragment extends Fragment {
         addBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddFragment addFragment = new AddFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,addFragment)
-                        .addToBackStack(null)
-                        .commit();
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.navigation_addpacients);
             }
         });
         return view;

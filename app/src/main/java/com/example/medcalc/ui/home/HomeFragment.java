@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.medcalc.R;
 import com.example.medcalc.databinding.FragmentHomeBinding;
@@ -40,22 +42,17 @@ public class HomeFragment extends Fragment {
         imtBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImtFragment imtFragment = new ImtFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,imtFragment)
-                        .addToBackStack(null)
-                        .commit();
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.navigation_imt);
+
             }
         });
 
         infBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InfFragment infFragment = new InfFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,infFragment)
-                        .addToBackStack(null)
-                        .commit();
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.navigation_inf);
 
             }
         });
@@ -63,22 +60,16 @@ public class HomeFragment extends Fragment {
         defBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DefFragment defFragment = new DefFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,defFragment)
-                        .addToBackStack(null)
-                        .commit();
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.navigation_def);
             }
         });
 
         capBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CapFragment capFragment = new CapFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,capFragment)
-                        .addToBackStack(null)
-                        .commit();
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.navigation_cap);
             }
         });
 
